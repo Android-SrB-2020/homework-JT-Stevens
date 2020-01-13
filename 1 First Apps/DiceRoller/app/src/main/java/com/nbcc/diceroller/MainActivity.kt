@@ -2,6 +2,7 @@ package com.nbcc.diceroller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -35,6 +36,11 @@ class MainActivity : AppCompatActivity() {
 //
 //        val resetButton: Button = findViewById(R.id.reset)
 //        resetButton.setOnClickListener { reset() }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.wtf("MainActivity", "Application Destroyed")
     }
 
     /**
