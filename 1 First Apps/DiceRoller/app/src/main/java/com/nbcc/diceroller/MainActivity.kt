@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
+import timber.log.Timber
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -27,6 +28,9 @@ class MainActivity : AppCompatActivity() {
 
         val clearButton: Button = findViewById(R.id.clear_button)
         clearButton.setOnClickListener { clear() }
+
+        Timber.i("onCreate called");
+
 //
 //        val resultText: TextView = findViewById(R.id.result_text)
 //        resultText.text = "Dice Rolled!"
@@ -41,8 +45,28 @@ class MainActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.wtf("MainActivity", "Application Destroyed")
+        Timber.wtf("OnDestroyed called")
     }
 
+    override fun onResume() {
+        super.onResume()
+        Timber.i("onResume Called")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Timber.i("onPause Called")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Timber.i("onStop Called")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Timber.i("onRestart Called")
+    }
     /**
      * Makes result text a random number between 1 and 6
      * Displays toast
