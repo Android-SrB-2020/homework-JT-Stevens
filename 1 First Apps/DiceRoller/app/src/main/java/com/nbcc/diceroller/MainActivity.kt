@@ -11,6 +11,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 import java.util.*
 
+const val KEY_DIE = "die_key"
+
 class MainActivity : AppCompatActivity() {
 
     lateinit var diceImage1: ImageView
@@ -20,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        diceImage1 = findViewById(R.id.dice_image1)
+//        diceImage1 = findViewById(R.id.dice_image1)
         diceImage2 = findViewById(R.id.dice_image2)
 
         val rollButton: Button = findViewById(R.id.roll_button)
@@ -28,6 +30,10 @@ class MainActivity : AppCompatActivity() {
 
         val clearButton: Button = findViewById(R.id.clear_button)
         clearButton.setOnClickListener { clear() }
+
+        if (savedInstanceState != null) {
+            diceImage1 = findViewById(savedInstanceState.getInt(KEY_DIE, 0))
+        }
 
         Timber.i("onCreate called");
 
@@ -91,6 +97,12 @@ class MainActivity : AppCompatActivity() {
         return drawableResource
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(KEY_DIE, R.id.dice_image1)
+
+        Timber.i("onSaveInstanceState Called")
+    }
 
     private fun clear() {
         diceImage1.setImageResource(R.drawable.empty_dice)
